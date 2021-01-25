@@ -186,7 +186,7 @@ A simple time command can give enough precision for this purpose.
 
 I didn't run it but, because it is linear could answer for
 
-    200000000 cents = $2000000 = $2*10^6
+    200000000 cents = $2000000 = $2*10⁶
 
 and that is the limit in my setup, which would take 15-16min.
 
