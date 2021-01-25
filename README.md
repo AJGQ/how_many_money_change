@@ -14,13 +14,10 @@ so I'm not gonna use it here.
 # The problem
 
 How many ways there are to make change 
-(with infinite the coins of type 1, 5, 10, 25, 50 and 100), of 
-    $2000 = 200000 cents
-.
+(with infinite the coins of type 1, 5, 10, 25, 50 and 100), of $2000 = 200000 cents.
 
-With the extra of what is the highest n, such that, 
-    $2*10^n
-can be calculated, with that algorithm, within 1 hour on my setup.
+With the extra of what is the highest n, such that, `$2*10^n` can be calculated, 
+with that algorithm, within 1 hour on my setup.
 
 
 ## Generalization
@@ -39,11 +36,8 @@ This problem can be seen as, finding the term m of the infinite polynomial (gene
 
 The obvious way of solving this problem is by limiting each infinite polynomial and then multiplying.
 That way is a bit unconfortable, because the limite would be on the same order as the input, and then
-we have to multiply 5 times, which each of them have time complexity 
-    O(n²)
-even with FFT with time complexity 
-    O(n*log(n))
-is still unconfortable.
+we have to multiply 5 times, which each of them have time complexity `O(n²)` even with FFT with time 
+complexity `O(n*log(n))` is still unconfortable.
 
 My approach is a math idea that I had for other topic, unrelated math topic.
 First we can use the closed form of each infinite polynomial, like so:
@@ -83,12 +77,9 @@ to get the term of degree 1 we can subtract a0 (`1/p(x) - a0`), then divide by x
 
 to get the term of degree m we can subtract a(m-1), then divide by x, then evaluate with `x = 0`, from the previous expression.
 
-With this approach we can get the solution with a time complexity
-    O(n)
-Which is awesome.
+With this approach we can get the solution with a time complexity `O(n)` Which is awesome.
 
-With a careful implementation, like I did, we can even see that the space complexity can be
-    O(1)
+With a careful implementation, like I did, we can even see that the space complexity can be `O(1)` 
 if we close our eyes to the multiple precision integers, which is surprising.
 
 # Code
@@ -133,6 +124,7 @@ all the terms wich have x^n, with n > 1, fancy way of saying we only
 keep the constant term. The constant term can be accessed by getting 
 the first element of the array, that can be done like `pol[0]`. So
 basically
+
     num(0)/den(0) = num[0]/den[0]
 
 Because den doesn't change we can calculate den(0), for every step as 
@@ -143,12 +135,14 @@ only 1. Leaving us with
 ### Second part (removing the constant term)
 
 Here we are going to basically do
+
     num/den - c = (num - c*den)/den
 
 ### Third part (Dividing by x)
 
 Here we are going to basically shift the `num` 
 polynomial to the left
+
     (num/x)/den
 
 # Running it
@@ -191,7 +185,9 @@ A simple time command can give enough precision for this purpose.
     sys 0m0,200s
 
 I didn't run it but, because it is linear could answer for
+
     200000000 cents = $2000000 = $2*10^6
+
 and that is the limit in my setup, which would take 15-16min.
 
 6 is very far from 100 but this approach could be used for other generating functions.
