@@ -191,3 +191,46 @@ I didn't run it but, because it is linear could answer for
 and that is the limit in my setup, which would take 15-16min.
 
 6 is very far from 100 but this approach could be used for other generating functions.
+
+# After Thought
+
+After some thought the strategy of rewriting the numerator of a fraction, 
+with the same procedure, makes me think of a linear operator, like a matrix.
+
+In This section I'm going to extend on this idea, and maybe derive an expression
+to answer this question. Which would mean a kinda constant time complexity program.
+
+The polynimials we are talking are of degree 191, i.e. not a simple task to do by hand,
+so to explain I'm gonna use a simpler example.
+
+    (a + bx + cx²)/(1 + dx + ex²) -> 
+    ( ((a + bx + cx²) - a*(1 + dx + ex²)) / x )/(1 + dx + ex²) =
+    ( (b - ad) + (c - ae)x )/(1 + dx + ex²)
+    
+    |-d 1 0| |a| = |b - ad|
+    |-e 0 1| |b|   |c - ae|
+    | 0 0 0| |c|   |0     |
+    
+It can be seen that with the denominator as the polynomial 
+    a0 + a1*x + a2*x² + ... + an*x^n
+this process is the same as applying the matrix (n+1)x(n+1)
+
+    A = |-a1 1 0 0 ... 0|
+        |-a2 0 1 0 ... 0|
+        |-a3 0 0 1 ... 0|
+        |... . . . ... .|
+        |-an 0 0 0 ... 1|
+        |  0 0 0 0 ... 0|
+
+To derive the expression that answers the problem we would have to 
+calculate for some `m` the `A^m` and that can be done easily if we 
+have an Eigendecomposition of A, 
+
+    A = PA * DA * PA^T
+    A^m = PA * DA^m * PA^T
+
+DA^m is easy to calculate, basically a `^m` pointwise.
+
+The hard part is to calculate the eigenvalues in DA.
+Especially in a symbolic way, because we don't want an approximation,
+because we are calculating for a number `m` with an arbitrary precision.
