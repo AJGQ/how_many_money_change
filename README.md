@@ -234,3 +234,24 @@ DA^m is easy to calculate, basically a `^m` pointwise.
 The hard part is to calculate the eigenvalues in DA.
 Especially in a symbolic way, because we don't want an approximation,
 because we are calculating for a number `m` with an arbitrary precision.
+
+Even though `PA` and `DA` are hard to get, the exponentiation of 
+a matrix can be done in `O(log n)` time complexity, with the exponentiation 
+by squaring, which means the googol challenge is reachable.
+
+The program that does that is in `moneych_mat.c`.
+
+# Results (Matrix exponentiation)
+
+Because of the massive amounts of allocations, and the multiplication not 
+using the cache appropriately, the time that takes to get a simple answer 
+for `100 cents`, take much more than what is expected by a user perspective.
+
+But where it shines is in super big inputs, like in `googol_challenge.sh`
+only taking 2 minutes and 6 seconds, in my setup which is pretty shabby.
+
+    $ sh googol_challenge.sh
+    42666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666677066666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667562666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666698866666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667090000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+    real    2m6,334s
+    user    2m6,242s
+    sys 0m0,060s
